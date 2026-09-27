@@ -1,0 +1,5 @@
+[0:v]zoompan=z='min(zoom+0.0004,1.033)':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1280x720:fps=24,trim=duration=3.333333,setpts=PTS-STARTPTS,format=yuv420p[a];
+[1:v]zoompan=z='min(zoom+0.0004,1.033)':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1280x720:fps=24,trim=duration=3.333333,setpts=PTS-STARTPTS,format=yuv420p[b];
+[a][b]blend=all_expr='A*(1-clip((T-0.38)/0.47,0,1))+B*clip((T-0.38)/0.47,0,1)',format=yuv420p[book];
+[2:v]drawtext=fontfile=assets/fonts/DejaVuSans-Bold.ttf:textfile=assets/title.txt:fontsize=73:fontcolor=0xeef5f0:x=(w-text_w)/2:y=22:shadowcolor=0x020b13@0.9:shadowx=3:shadowy=3,drawtext=fontfile=assets/fonts/DejaVuSans.ttf:textfile=assets/tagline.txt:fontsize=29:fontcolor=0x3fcf7f:x=(w-text_w)/2:y=120:shadowcolor=0x020b13@0.9:shadowx=2:shadowy=2,rotate=-0.12:fillcolor=none:ow=rotw(iw):oh=roth(ih),fade=t=in:st=1.38:d=0.38:alpha=1,format=rgba[title];
+[book][title]overlay=x=367:y=15:shortest=1:format=auto,fade=t=in:st=0:d=0.10,format=yuv420p[v]
